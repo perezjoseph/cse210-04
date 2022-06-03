@@ -12,21 +12,21 @@ Greed is a game in which the player seeks to gather as many falling gems as poss
 
 # New Classes 
 
-We will use rfk classes, and create new classes that use inheritance.
+\nWe will use rfk classes, and create new classes that use inheritance.
 
 This class will move the object (gems and rocks)
-\+ flyingObject => cast
+\n\+ flyingObject => cast
 
 This class will define the attributes of the rocks and gems
-\+ Mineral => actor 
-	Gems int
-	Rocks int
-	Set_Value()
+\n\+ Mineral => actor 
+	\nGems int
+	\nRocks int
+	\nSet_Value()
 	
 Will set the score on the screen
-\+ Player => actor
-	score int
-	sumScore()
+\n\+ Player => actor
+	\nscore int
+	\nsumScore()
 
 	
 	
