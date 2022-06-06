@@ -14,18 +14,17 @@ from game.shared.color import Color
 from game.shared.point import Point
 
 
-FRAME_RATE = 12
+FRAME_RATE = 30
 MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
 FONT_SIZE = 15
 COLS = 60
 ROWS = 40
-CAPTION = "Robot Finds Kitten"
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
+CAPTION = "Greed"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
-
+GEMS = 20
+ROCKS = 10
 
 def main():
     
@@ -42,47 +41,81 @@ def main():
     
     # create the robot
     x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
+    y = int(MAX_Y - FONT_SIZE)
     position = Point(x, y)
 
     robot = Actor()
-    robot.set_text("O")
+    robot.set_text("#")
     robot.set_font_size(FONT_SIZE)
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
     
-    # create the artifacts
-    with open(DATA_PATH) as file:
-        data = file.read()
-        messages = data.splitlines()
-# Render the letters 40 times using the loop
-    for n in range(DEFAULT_ARTIFACTS):
-        #Modifies the artifact, change it to become any letter you want we can use this to define gems and rocks we need to define a class that creates gems and rocks
-        text = chr(random.randint(33, 126))
-        #Modifies what the artifact contains when you select it using the actor, we can use this to the score 
-        message = messages[n]
+    # create the gems
 
-        #We can control this to define the position of gems, we can create a class flying object that moves this object
-        x = random.randint(1, COLS - 1)
-        y = random.randint(1, ROWS - 1)
-        
-        position = Point(x, y)
-        position = position.scale(CELL_SIZE)
+    for _ in range(GEMS):
 
-        r = random.randint(0, 255)
-        g = random.randint(0, 255)
-        b = random.randint(0, 255)
-        color = Color(r, g, b)
+        g_text = "*"
+        g_x = random.randint(1, COLS - 1)
+        g_y = random.randint(1, ROWS - 1)
         
-        artifact = Artifact()
-        artifact.set_text(text)
-        artifact.set_font_size(FONT_SIZE)
-        artifact.set_color(color)
-        artifact.set_position(position)
-        artifact.set_message(message)
-        cast.add_actor("artifacts", artifact)
+        g_position = Point(g_x, g_y)
+        g_position = g_position.scale(CELL_SIZE)
+
+        g_r = 0
+        g_g = 0
+        g_b = 255
+        g_color = Color(g_r, g_g, g_b)
+        
+        # creates the gem object
+        gems_art = Artifact()
+
+        # set gem to *
+        gems_art.set_text(g_text)
+        
+        # gem size
+        gems_art.set_font_size(FONT_SIZE)
+        # gem color
+        gems_art.set_color(g_color)
+        # gem position
+        gems_art.set_position(g_position)
+        # add gems to game space
+        cast.add_actor("gems", gems_art)
     
+    # create the rocks
+    for _ in range(ROCKS):
+
+        r_text = "O"
+        r_x = random.randint(1, COLS - 1)
+        r_y = MAX_Y
+        
+        r_position = Point(r_x, r_y)
+        r_position = r_position.scale(CELL_SIZE)
+
+        r_r = 255
+        r_g = 0
+        r_b = 0
+        r_color = Color(r_r, r_g, r_b)
+        
+        # crea el objeto gemas
+        rocks_art = Artifact()
+
+        # fijar el texto de las gemas
+        rocks_art.set_text(r_text)
+        
+        # tamaño de la letra en las gemas
+        rocks_art.set_font_size(FONT_SIZE)
+        # les da color a las gemas
+        rocks_art.set_color(r_color)
+        # fija la posicion de las gemas
+        rocks_art.set_position(r_position)
+
+        rocks_art.move_next(MAX_X,MAX_Y)
+        rocks_art.set_velocity(50)
+        # agrega las gemas al espacio
+        cast.add_actor("rocks", rocks_art)
+
+
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)

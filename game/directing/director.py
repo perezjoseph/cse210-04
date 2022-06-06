@@ -49,17 +49,23 @@ class Director:
         """
         banner = cast.get_first_actor("banners")
         robot = cast.get_first_actor("robots")
-        artifacts = cast.get_actors("artifacts")
+        gems = cast.get_actors("gems")
+        rocks = cast.get_actors("rocks")
 
         banner.set_text("")
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
         
-        for artifact in artifacts:
-            if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)    
+        for gem in gems:
+            if robot.get_position().equals(gem.get_position()):
+                # Increase score
+                gem = gem.set_text("")
+
+        for rock in rocks:
+            if robot.get_position().equals(rock.get_position()):
+                # Decrease score
+                rock.set_text("")  
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
