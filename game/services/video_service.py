@@ -100,6 +100,7 @@ class VideoService:
         """
         pyray.init_window(self._width, self._height, self._caption)
         pyray.set_target_fps(self._frame_rate)
+        print(pyray.get_time())
 
     def _draw_grid(self):
         """Draws a grid on the screen."""

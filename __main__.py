@@ -6,6 +6,7 @@ from game.casting.artifact import Artifact
 from game.casting.cast import Cast
 
 from game.directing.director import Director
+from game.directing.director import flyingObject
 
 from game.services.keyboard_service import KeyboardService
 from game.services.video_service import VideoService
@@ -24,7 +25,7 @@ ROWS = 40
 CAPTION = "Greed"
 WHITE = Color(255, 255, 255)
 GEMS = 20
-ROCKS = 10
+ROCKS = 20
 
 def main():
     
@@ -102,7 +103,7 @@ def main():
 
         # fijar el texto de las gemas
         rocks_art.set_text(r_text)
-        
+         
         # tamaño de la letra en las gemas
         rocks_art.set_font_size(FONT_SIZE)
         # les da color a las gemas
@@ -111,7 +112,6 @@ def main():
         rocks_art.set_position(r_position)
 
         rocks_art.move_next(MAX_X,MAX_Y)
-        rocks_art.set_velocity(50)
         # agrega las gemas al espacio
         cast.add_actor("rocks", rocks_art)
 
@@ -119,7 +119,7 @@ def main():
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
-    director = Director(keyboard_service, video_service)
+    director = flyingObject(keyboard_service, video_service)
     director.start_game(cast)
 
 

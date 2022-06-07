@@ -1,7 +1,6 @@
 import pyray
 from game.shared.point import Point
 
-
 class KeyboardService:
     """Detects player input. 
     
@@ -26,6 +25,7 @@ class KeyboardService:
         Returns:
             Point: The selected direction.
         """
+        time = pyray.get_time()
         dx = 0
         dy = 0
 
@@ -40,7 +40,6 @@ class KeyboardService:
         
         if pyray.is_key_down(pyray.KEY_DOWN):
             dy = 1
-
         direction = Point(dx, dy)
         direction = direction.scale(self._cell_size)
         

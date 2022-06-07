@@ -29,3 +29,10 @@ class Artifact(Actor):
             message (string): The given message.
         """
         self._message = message
+    def set_velocity(self, velocity):
+        """Updates the velocity to the given one.
+        
+        Args:
+            velocity (Point): The given velocity.
+        """
+        self._velocity = velocity

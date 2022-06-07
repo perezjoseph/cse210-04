@@ -1,3 +1,4 @@
+
 class Director:
     """A person who directs the game. 
     
@@ -38,9 +39,8 @@ class Director:
             cast (Cast): The cast of actors.
         """
         robot = cast.get_first_actor("robots")
-        velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
-
+        velocity = self._keyboard_service.get_direction()      
+        robot.set_velocity(velocity) 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
         
@@ -58,10 +58,11 @@ class Director:
         robot.move_next(max_x, max_y)
         
         for gem in gems:
+            gem.move_next(max_x, max_y)
             if robot.get_position().equals(gem.get_position()):
                 # Increase score
                 gem = gem.set_text("")
-
+        
         for rock in rocks:
             if robot.get_position().equals(rock.get_position()):
                 # Decrease score
@@ -77,3 +78,23 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+class flyingObject(Director):
+    def __init__(self, keyboard_service, video_service):
+        super().__init__(keyboard_service, video_service)
+    def _get_inputs(self, cast):
+        """Gets directional input from the keyboard and applies it to the robot.
+        
+        Args:
+            cast (Cast): The cast of actors.
+        """
+        robot = cast.get_first_actor("robots")
+        gems = cast.get_actors("gems")
+        for gem in gems:
+            velocityGem = self._keyboard_service.get_direction()
+            gem.set_velocity(velocityGem) 
+        velocity = self._keyboard_service.get_direction()      
+        robot.set_velocity(velocity) 
+    
+
+         
+        
