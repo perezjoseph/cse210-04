@@ -64,6 +64,7 @@ class Director:
                 gem = gem.set_text("")
         
         for rock in rocks:
+            rock.move_next(max_x, max_y)
             if robot.get_position().equals(rock.get_position()):
                 # Decrease score
                 rock.set_text("")  
@@ -89,9 +90,14 @@ class flyingObject(Director):
         """
         robot = cast.get_first_actor("robots")
         gems = cast.get_actors("gems")
+        rocks = cast.get_actors("rocks")
+        velocityGem = self._keyboard_service.move()
         for gem in gems:
-            velocityGem = self._keyboard_service.get_direction()
-            gem.set_velocity(velocityGem) 
+        
+            gem.set_velocity(velocityGem)
+        for rock in rocks:
+            rock.set_velocity(velocityGem)
+
         velocity = self._keyboard_service.get_direction()      
         robot.set_velocity(velocity) 
     

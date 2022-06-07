@@ -9,6 +9,8 @@ from game.directing.director import Director
 from game.directing.director import flyingObject
 
 from game.services.keyboard_service import KeyboardService
+
+from game.services.keyboard_service import timer
 from game.services.video_service import VideoService
 
 from game.shared.color import Color
@@ -88,7 +90,7 @@ def main():
 
         r_text = "O"
         r_x = random.randint(1, COLS - 1)
-        r_y = MAX_Y
+        r_y = random.randint(1, ROWS - 1)
         
         r_position = Point(r_x, r_y)
         r_position = r_position.scale(CELL_SIZE)
@@ -117,7 +119,7 @@ def main():
 
 
     # start the game
-    keyboard_service = KeyboardService(CELL_SIZE)
+    keyboard_service = timer(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
     director = flyingObject(keyboard_service, video_service)
     director.start_game(cast)

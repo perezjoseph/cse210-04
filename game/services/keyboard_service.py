@@ -25,7 +25,6 @@ class KeyboardService:
         Returns:
             Point: The selected direction.
         """
-        time = pyray.get_time()
         dx = 0
         dy = 0
 
@@ -43,4 +42,14 @@ class KeyboardService:
         direction = Point(dx, dy)
         direction = direction.scale(self._cell_size)
         
+        return direction
+class timer(KeyboardService):
+    def __init__(self, cell_size = 1):
+        super().__init__()
+    def move(self):
+        dx=0
+        dy =0
+        dy = 1
+        direction = Point(dx,dy)
+        direction = direction.scale(self._cell_size)
         return direction
