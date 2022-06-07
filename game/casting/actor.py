@@ -115,3 +115,20 @@ class Actor:
             velocity (Point): The given velocity.
         """
         self._velocity = velocity
+
+class Mineral(Actor):
+    def __init__(self):
+        super().__init__()
+        self.gem = {}
+        self.rock = {}
+    def set_value(self):
+        if self._text == '*':
+            self.gem = {'item': '*', 'value': 1} 
+        else:
+            self.rock = {'item': 'O', 'value': -1}
+
+
+
+
+
+            

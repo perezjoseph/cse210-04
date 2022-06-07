@@ -1,9 +1,11 @@
 import os
 import random
-
 from game.casting.actor import Actor
+from game.casting.actor import Mineral
 from game.casting.artifact import Artifact
+from game.casting.artifact import Player
 from game.casting.cast import Cast
+
 
 from game.directing.director import Director
 
@@ -12,6 +14,7 @@ from game.services.video_service import VideoService
 
 from game.shared.color import Color
 from game.shared.point import Point
+
 
 
 FRAME_RATE = 12
@@ -28,10 +31,10 @@ DEFAULT_ARTIFACTS = 40
 
 
 def main():
-    
+
     # create the cast
     cast = Cast()
-    
+
     # create the banner
     banner = Actor()
     banner.set_text("")
@@ -39,19 +42,19 @@ def main():
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
     cast.add_actor("banners", banner)
-    
+
     # create the robot
     x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
+    y = int(MAX_Y - 15)
     position = Point(x, y)
 
     robot = Actor()
-    robot.set_text("O")
+    robot.set_text("#")
     robot.set_font_size(FONT_SIZE)
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
-    
+
     # create the artifacts
     with open(DATA_PATH) as file:
         data = file.read()
@@ -59,14 +62,14 @@ def main():
 # Render the letters 40 times using the loop
     for n in range(DEFAULT_ARTIFACTS):
         #Modifies the artifact, change it to become any letter you want we can use this to define gems and rocks we need to define a class that creates gems and rocks
-        text = chr(random.randint(33, 126))
-        #Modifies what the artifact contains when you select it using the actor, we can use this to the score 
+        text = random.choice(['*','O'])
+        #Modifies what the artifact contains when you select it using the actor, we can use this to the score
         message = messages[n]
 
         #We can control this to define the position of gems, we can create a class flying object that moves this object
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
-        
+
         position = Point(x, y)
         position = position.scale(CELL_SIZE)
 
@@ -74,15 +77,16 @@ def main():
         g = random.randint(0, 255)
         b = random.randint(0, 255)
         color = Color(r, g, b)
-        
-        artifact = Artifact()
+
+        artifact = Player()
         artifact.set_text(text)
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)
-        artifact.set_message(message)
+        artifact.set_value()
+        artifact.do_math()
         cast.add_actor("artifacts", artifact)
-    
+
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
     video_service = VideoService(CAPTION, MAX_X, MAX_Y, CELL_SIZE, FRAME_RATE)
@@ -92,3 +96,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+mineral = Mineral()
+mineral.set_text('*')
+mineral.set_value()
