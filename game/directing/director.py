@@ -78,6 +78,7 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+"This class will move the gems and rocks down"
 class flyingObject(Director):
     def __init__(self, keyboard_service, video_service):
         super().__init__(keyboard_service, video_service)
@@ -89,9 +90,12 @@ class flyingObject(Director):
         """
         robot = cast.get_first_actor("robots")
         gems = cast.get_actors("gems")
+        rocks = cast.get_actors("rocks")
         for gem in gems:
-            velocityGem = self._keyboard_service.get_direction()
-            gem.set_velocity(velocityGem) 
+            velocityGem = self._keyboard_service.move()
+            gem.set_velocity(velocityGem)
+        for rock in rocks:
+            rock.set_velocity(velocityGem)
         velocity = self._keyboard_service.get_direction()      
         robot.set_velocity(velocity) 
     
