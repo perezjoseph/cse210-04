@@ -1,3 +1,4 @@
+from game.shared.point import Point
 class Director:
     """A person who directs the game. 
     
@@ -38,8 +39,10 @@ class Director:
             cast (Cast): The cast of actors.
         """
         robot = cast.get_first_actor("robots")
+        rocks = cast.get_first_actor("rocks")
         velocity = self._keyboard_service.get_direction()
-        robot.set_velocity(velocity)        
+        robot.set_velocity(velocity)
+        
 
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
@@ -57,15 +60,23 @@ class Director:
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
         
+
+        
         for gem in gems:
             if robot.get_position().equals(gem.get_position()):
                 # Increase score
-                gem = gem.set_text("")
+                gem.set_text("")
+            gem.set_velocity(Point(0,1))
+            gem.move_next(max_x, max_y)
 
         for rock in rocks:
             if robot.get_position().equals(rock.get_position()):
                 # Decrease score
                 rock.set_text("")  
+            rock.set_velocity(Point(0,1))
+            rock.move_next(max_x, max_y)
+            
+        
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.

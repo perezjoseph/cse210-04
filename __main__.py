@@ -87,7 +87,7 @@ def main():
 
         r_text = "O"
         r_x = random.randint(1, COLS - 1)
-        r_y = MAX_Y
+        r_y = random.randint(1, ROWS - 1) #MAX_Y
         
         r_position = Point(r_x, r_y)
         r_position = r_position.scale(CELL_SIZE)
@@ -110,8 +110,7 @@ def main():
         # fija la posicion de las gemas
         rocks_art.set_position(r_position)
 
-        rocks_art.move_next(MAX_X,MAX_Y)
-        rocks_art.set_velocity(50)
+
         # agrega las gemas al espacio
         cast.add_actor("rocks", rocks_art)
 
