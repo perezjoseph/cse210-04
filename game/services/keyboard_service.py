@@ -1,6 +1,6 @@
 import pyray
 from game.shared.point import Point
-
+import time
 class KeyboardService:
     """Detects player input. 
     
@@ -48,15 +48,9 @@ class timer(KeyboardService):
     def __init__(self, cell_size = 1):
         super().__init__()
     def move(self):
-        time = pyray.get_time()
-        time2 = pyray.get_time() - 0.0001
         dx = 0
         dy = 0
-        if time > time2:
-            time = pyray.get_time() - 0.0002
-            dy = 1
-            if time < time2:
-                time = pyray.get_time()
+        dy += 1          
         direction = Point(dx, dy)
         direction = direction.scale(self._cell_size)
         
