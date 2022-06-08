@@ -101,19 +101,19 @@ def main():
         r_b = 0
         r_color = Color(r_r, r_g, r_b)
         
-        # crea el objeto gemas
+        # creates the gem object
         rocks_art = Artifact()
 
-        # fijar el texto de las gemas
+        # set gem to *
         rocks_art.set_text(r_text)
          
-        # tamaño de la letra en las gemas
+        # gem size
         rocks_art.set_font_size(FONT_SIZE)
-        # les da color a las gemas
+        # gem color
         rocks_art.set_color(r_color)
-        # fija la posicion de las gemas
+        # gem position
         rocks_art.set_position(r_position)
-        # agrega las gemas al espacio
+        # add gems to game space
         cast.add_actor("rocks", rocks_art)
 
 

@@ -115,7 +115,8 @@ class Actor:
             velocity (Point): The given velocity.
         """
         self._velocity = velocity
-"The responsability of this class is to control how the robot wraps"
+
+# "The responsability of this class is to control how the robot wraps"
 class Player(Actor):
     def __init__(self):
         super().__init__()
@@ -124,7 +125,6 @@ class Player(Actor):
         x = (self._position.get_x() + self._velocity.get_x()) % max_x
         y = (self._position.get_y() + self._velocity.get_y())
         if y > max_y - 20 :
-            #y = self._position.get_y() - self._position.get_y() ##int(round(max_y /10))
             y = max_y - 20
         if y < max_y - 100:
             y = max_y - 100
