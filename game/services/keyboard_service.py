@@ -44,6 +44,7 @@ class KeyboardService:
         
         return direction
 class timer(KeyboardService):
+
     def __init__(self, cell_size = 1):
         super().__init__()
     def move(self):
