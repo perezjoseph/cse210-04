@@ -2,6 +2,7 @@ import os
 import random
 
 from game.casting.actor import Actor
+from game.casting.actor import Player
 from game.casting.artifact import Artifact
 from game.casting.cast import Cast
 
@@ -17,11 +18,11 @@ from game.shared.color import Color
 from game.shared.point import Point
 
 
-FRAME_RATE = 30
+FRAME_RATE = 60
 MAX_X = 900
 MAX_Y = 600
-CELL_SIZE = 15
-FONT_SIZE = 15
+CELL_SIZE = 30
+FONT_SIZE = 25
 COLS = 60
 ROWS = 40
 CAPTION = "Greed"
@@ -35,8 +36,8 @@ def main():
     cast = Cast()
     
     # create the banner
-    banner = Actor()
-    banner.set_text("")
+    banner = Player()
+    banner.set_text("Score: 0")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
@@ -47,9 +48,9 @@ def main():
     y = int(MAX_Y - FONT_SIZE)
     position = Point(x, y)
 
-    robot = Actor()
+    robot = Player()
     robot.set_text("#")
-    robot.set_font_size(FONT_SIZE)
+    robot.set_font_size(50)
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
@@ -112,8 +113,6 @@ def main():
         rocks_art.set_color(r_color)
         # fija la posicion de las gemas
         rocks_art.set_position(r_position)
-
-        rocks_art.move_next(MAX_X,MAX_Y)
         # agrega las gemas al espacio
         cast.add_actor("rocks", rocks_art)
 

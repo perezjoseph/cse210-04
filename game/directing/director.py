@@ -1,4 +1,5 @@
-
+import random
+from game.shared.point import Point 
 class Director:
     """A person who directs the game. 
     
@@ -51,23 +52,29 @@ class Director:
         robot = cast.get_first_actor("robots")
         gems = cast.get_actors("gems")
         rocks = cast.get_actors("rocks")
-
-        banner.set_text("")
+        
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
-        robot.move_next(max_x, max_y)
+        robot.wrap(max_x, max_y)
         
         for gem in gems:
             gem.move_next(max_x, max_y)
             if robot.get_position().equals(gem.get_position()):
-                # Increase score
-                gem = gem.set_text("")
-        
+                g_x = random.randint(1, 599)
+                g_y = random.randint(1, 1)
+                robot.sumScore()
+                gem.set_position(Point(g_x, g_y))
+                banner.set_text(f'Score: {robot.points}')
+                #Increase score
         for rock in rocks:
             rock.move_next(max_x, max_y)
             if robot.get_position().equals(rock.get_position()):
+                robot.sub()
+                r_x = random.randint(1, 599)
+                r_y = random.randint(1, 1)
+                banner.set_text(f'Score: {robot.points}')
+                rock.set_position(Point(r_x, r_y))
                 # Decrease score
-                rock.set_text("")  
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
@@ -79,6 +86,7 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+"This class will move the gems and rocks down"
 class flyingObject(Director):
     def __init__(self, keyboard_service, video_service):
         super().__init__(keyboard_service, video_service)
