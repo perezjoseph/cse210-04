@@ -6,6 +6,7 @@ class timer(KeyboardService):
 
     def __init__(self, cell_size = 1):
         super().__init__()
+    "Move gems and rocks down"
     def move(self):
         dx=0
         dy =0
