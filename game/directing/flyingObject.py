@@ -15,7 +15,7 @@ class flyingObject(Director):
         robot = cast.get_first_actor("robots")
         gems = cast.get_actors("gems")
         rocks = cast.get_actors("rocks")
-        velocityGem = self._keyboard_service.move(random.randint(1, 5))
+        velocityGem = self._keyboard_service.move()
         for gem in gems:
             gem.set_velocity(velocityGem)
         for rock in rocks:

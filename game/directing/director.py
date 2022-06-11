@@ -58,15 +58,18 @@ class Director:
         robot.wrap(max_x, max_y)
         
         for gem in gems:
+            gem.set_velocity(Point(0, random.randint(1, 5))) 
             gem.move_next(max_x, max_y)
             if robot.get_position().equals(gem.get_position()):
                 g_x = random.randint(1, 599)
                 g_y = random.randint(1, 1)
                 robot.sumScore()
                 gem.set_position(Point(g_x, g_y))
+                
                 banner.set_text(f'Score: {robot.points}')
                 #Increase score
         for rock in rocks:
+            rock.set_velocity(Point(0, random.randint(1, 5))) 
             rock.move_next(max_x, max_y)
             if robot.get_position().equals(rock.get_position()):
                 robot.sub()
@@ -86,30 +89,3 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
-
-# "This class will move the gems and rocks down works with the class timer"
-class flyingObject(Director):
-    
-    def __init__(self, keyboard_service, video_service):
-        super().__init__(keyboard_service, video_service)
-    def _get_inputs(self, cast):
-        """Gets directional input from the keyboard and applies it to the robot.
-        
-        Args:
-            cast (Cast): The cast of actors.
-        """
-        robot = cast.get_first_actor("robots")
-        gems = cast.get_actors("gems")
-        rocks = cast.get_actors("rocks")
-        velocityGem = self._keyboard_service.move()
-        for gem in gems:
-            gem.set_velocity(velocityGem)
-        for rock in rocks:
-            rock.set_velocity(velocityGem)
-
-        velocity = self._keyboard_service.get_direction()      
-        robot.set_velocity(velocity) 
-    
-
-         
-        
