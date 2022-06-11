@@ -15,12 +15,14 @@ Greed is a game in which the player seeks to gather as many falling gems as poss
 We will use rfk classes, and create new classes that use inheritance.
 
 ##### This class will move the object (gems and rocks)
+Contributors: Joseph Perez, Daniel Parra 
 ```
-+ flyingObject => cast
++ flyingObject => Director
 ```
 ##### This class will define the attributes of the rocks and gems
 ```
-+Mineral => actor 
+Contributors: Daniel Parra, Joseph Perez
++Player => actor 
 	Gems int
 	Rocks int
 	Set_Value()

@@ -41,8 +41,9 @@ class Point:
         Returns: 
             boolean: True if both x and y are equal; false if otherwise.
         """
-        a = other.get_x() - self._x
-        b = other.get_y() - self._y
+  
+        a = self._x  - other.get_x()
+        b = self._y - other.get_y()
         if (((a < 20) and (a > - 20)) and ((b < 20) and (b > -20))):
             return True
         else:

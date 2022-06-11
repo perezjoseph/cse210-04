@@ -87,7 +87,7 @@ class Director:
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
 
-# "This class will move the gems and rocks down"
+# "This class will move the gems and rocks down works with the class timer"
 class flyingObject(Director):
     
     def __init__(self, keyboard_service, video_service):
@@ -103,7 +103,6 @@ class flyingObject(Director):
         rocks = cast.get_actors("rocks")
         velocityGem = self._keyboard_service.move()
         for gem in gems:
-        
             gem.set_velocity(velocityGem)
         for rock in rocks:
             rock.set_velocity(velocityGem)
