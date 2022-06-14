@@ -46,6 +46,6 @@ Added a range for the robot, so it does't have to be too precise to catch a gem
 
 Cleaning the code contributions:
 
-Jonathan Uribe
+- Jonathan Uribe
 
-Thomas Villalobos
+- Thomas Villalobos
